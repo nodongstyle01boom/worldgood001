@@ -64,7 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.4,
     },
-    ...["/resources", "/services", "/editorial-policy"].map((p) => ({url: `${base}${p}`, lastModified: new Date("2026-10-05"), changeFrequency: "monthly" as const, priority: 0.7})),
+    ...["/resources", "/services", "/editorial-policy", "/adpolicy"].map((p) => ({url: `${base}${p}`, lastModified: new Date("2026-10-21"), changeFrequency: "monthly" as const, priority: 0.7})),
     ...categoryEntries,
     ...postEntries,
   ];
