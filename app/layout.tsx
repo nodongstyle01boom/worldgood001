@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.author }],
   other: {
     // Naver Search Advisor site verification (하루기록, account: 소똑)
-    "naver-site-verification": "c2f35a5e7120a29cb7ac63dcf87140d065e89612",
+    "naver-site-verification": "90c6ffcbac243f7ed047fddcbb053814480c2d48",
     ...(process.env.NEXT_PUBLIC_ADSENSE_CLIENT
       ? { "google-adsense-account": process.env.NEXT_PUBLIC_ADSENSE_CLIENT }
       : {}),

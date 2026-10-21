@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { getAllCategories, getAllPosts } from "@/lib/posts";
+import { getAllCategories, getAllPosts, hasCurrentTranslation } from "@/lib/posts";
 import { siteConfig } from "@/lib/site";
 import { LANGS, langPrefix } from "@/lib/i18n";
 
@@ -13,9 +13,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     LANGS.map((lang) => `${base}${langPrefix(lang)}${path}`);
 
   const postEntries: MetadataRoute.Sitemap = posts.flatMap((post) =>
-    variants(`/p/${post.slug}`).map((url) => ({
+    LANGS.filter((lang) => hasCurrentTranslation(post.slug, lang))
+      .map((lang) => `${base}${langPrefix(lang)}/p/${post.slug}`).map((url) => ({
       url,
-      lastModified: post.date ? new Date(post.date) : new Date(),
+      lastModified: new Date(post.updated || post.date || Date.now()),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     })),
@@ -63,6 +64,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: "monthly",
       priority: 0.4,
     },
+    ...["/resources", "/services", "/editorial-policy"].map((p) => ({url: `${base}${p}`, lastModified: new Date("2026-10-05"), changeFrequency: "monthly" as const, priority: 0.7})),
     ...categoryEntries,
     ...postEntries,
   ];

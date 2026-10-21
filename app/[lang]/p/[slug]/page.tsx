@@ -3,7 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import AdSlot from "@/components/AdSlot";
 import { categoryLabel } from "@/lib/categories";
-import { formatDate, getAllPostSlugs, getPostBySlug, getRelatedPosts } from "@/lib/posts";
+import { formatDate, getAllPostSlugs, getPostBySlug, getRelatedPosts, hasCurrentTranslation } from "@/lib/posts";
 import { siteConfig } from "@/lib/site";
 import {
   DEFAULT_LANG,
@@ -36,7 +36,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     ko: `/p/${post.slug}`,
     "x-default": `/p/${post.slug}`,
   };
-  for (const l of TARGET_LANGS) languages[l] = `/${l}/p/${post.slug}`;
+  for (const l of TARGET_LANGS) {
+    if (hasCurrentTranslation(post.slug, l)) languages[l] = `/${l}/p/${post.slug}`;
+  }
 
   return {
     title: post.title,
@@ -46,7 +48,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       description: post.description,
       type: "article",
       publishedTime: post.date,
-      url: `${siteConfig.url}/p/${post.slug}`,
+      url: `${siteConfig.url}${postPath(post.slug, L)}`,
       images: [{ url: post.image, width: 1200, height: 630, alt: post.title }],
     },
     twitter: {

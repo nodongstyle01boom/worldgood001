@@ -148,7 +148,7 @@ const UI: Record<Lang, Record<UIKey, string>> = {
     postsInCategory: "이 주제의 기록",
     backToList: "← 글 목록",
     writtenBy: "글쓴이",
-    humanReviewed: "사람 검토 후 게시",
+    humanReviewed: "AI 작성 보조 · 전문가 검수 미완료",
     homeKicker: "하루기록 · 현장 노트",
     homeTitle: "하루를 기록하고, 다음 행동으로 바꾸는 공간",
     homeIntro:
@@ -183,7 +183,7 @@ const UI: Record<Lang, Record<UIKey, string>> = {
     postsInCategory: "posts in this topic",
     backToList: "← All posts",
     writtenBy: "Written by",
-    humanReviewed: "Human reviewed",
+    humanReviewed: "AI-assisted · not professionally reviewed",
     homeKicker: "Daily log · Field notes",
     homeTitle: "Record the day, turn it into the next action",
     homeIntro:
@@ -218,7 +218,7 @@ const UI: Record<Lang, Record<UIKey, string>> = {
     postsInCategory: "このテーマの記事",
     backToList: "← 記事一覧",
     writtenBy: "執筆",
-    humanReviewed: "人が確認して公開",
+    humanReviewed: "AI補助使用・専門家の検証は未完了",
     homeKicker: "하루기록・現場ノート",
     homeTitle: "一日を記録して、次の行動に変える場所",
     homeIntro:
@@ -253,7 +253,7 @@ const UI: Record<Lang, Record<UIKey, string>> = {
     postsInCategory: "该主题的文章",
     backToList: "← 文章列表",
     writtenBy: "作者",
-    humanReviewed: "经人工审核后发布",
+    humanReviewed: "使用AI辅助，尚未完成专家审核",
     homeKicker: "日常记录 · 现场笔记",
     homeTitle: "记录一天，把它变成下一个行动",
     homeIntro:
@@ -288,7 +288,7 @@ const UI: Record<Lang, Record<UIKey, string>> = {
     postsInCategory: "artículos en este tema",
     backToList: "← Todos los artículos",
     writtenBy: "Escrito por",
-    humanReviewed: "Revisado por una persona",
+    humanReviewed: "Con asistencia de IA · sin revisión profesional",
     homeKicker: "Registro diario · Notas de campo",
     homeTitle: "Registrar el día y convertirlo en la siguiente acción",
     homeIntro:

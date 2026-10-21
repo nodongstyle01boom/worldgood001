@@ -9,6 +9,7 @@ import { categoryLabel } from "@/lib/categories";
 import {
   formatDateKo,
   getAllPostSlugs,
+  hasCurrentTranslation,
   getPostBySlug,
   getRelatedPosts,
 } from "@/lib/posts";
@@ -26,7 +27,9 @@ export async function generateStaticParams() {
 /** 같은 글의 다른 언어 주소 — hreflang 이 없으면 다국어 SEO 가 통째로 무력화된다. */
 function languageAlternates(slug: string): Record<string, string> {
   const out: Record<string, string> = { "x-default": `/p/${slug}` };
-  for (const l of LANGS) out[l] = `${langPrefix(l as Lang)}/p/${slug}`;
+  for (const l of LANGS) {
+    if (hasCurrentTranslation(slug, l)) out[l] = `${langPrefix(l as Lang)}/p/${slug}`;
+  }
   return out;
 }
 
@@ -173,7 +176,7 @@ export default async function PostPage({ params }: Props) {
               </Link>
             </span>
             <span aria-hidden>·</span>
-            <span>사람 검토 후 게시</span>
+            <span>출처·수정일 확인</span>
           </div>
           <h1 className="mt-3 font-serif text-3xl font-semibold leading-snug tracking-tight text-ink-900 sm:text-4xl">
             {post.title}
@@ -238,15 +241,15 @@ export default async function PostPage({ params }: Props) {
         {/* E-E-A-T: 누가, 무엇을 근거로 썼는지 본문 아래에서 바로 확인하게 한다. */}
         <aside className="mt-8 rounded-xl border border-ink-200 bg-white p-5">
           <p className="text-xs font-semibold uppercase tracking-[0.18em] text-accent">
-            Verified
+            Editorial note
           </p>
           <h2 className="mt-1 font-serif text-base font-semibold text-ink-900">
             이 글을 쓴 사람과 근거
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-ink-700">
-            글쓴이 <strong>{siteConfig.author}</strong> 님이 직접 작성하고 게시 전에
-            검토했습니다. 금액·요율·법령은 기준일을 함께 적었으므로 시점이 다르면
-            달라질 수 있습니다. 계산 예시는 실제 계약을 대체하지 않습니다.
+            운영: <strong>{siteConfig.author}</strong>. 일부 글은 AI 작성 보조를 활용합니다.
+            출처와 수정일을 확인하고 원문 안내를 다시 확인하세요. 전체 글의 전문가 검수를
+            완료했다는 뜻은 아니며, 계산 예시는 실제 계약·법률·세무 판단을 대체하지 않습니다.
           </p>
           <p className="mt-2 text-sm text-ink-700">
             오류를 발견하면{" "}
@@ -261,6 +264,7 @@ export default async function PostPage({ params }: Props) {
           </p>
         </aside>
 
+        <section className="mt-8 rounded-xl border border-ink-200 p-5"><h2 className="font-semibold">직접 쓰는 무료 자료와 제작 문의</h2><p className="mt-2"><Link href="/resources" className="text-accent underline">점검표·인터뷰·예산표 다운로드</Link> · <Link href="/services" className="text-accent underline">문서·책 제작 문의</Link></p><p className="mt-2 text-sm">무료 자료와 별도 유료 제작 제안을 구분합니다. 아직 결제·주문되지 않습니다.</p></section>
         <NewsletterForm source={`post:${post.slug}`} className="mt-8" />
 
         {related.length > 0 ? (

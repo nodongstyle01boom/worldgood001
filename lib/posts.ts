@@ -103,10 +103,24 @@ function validSlug(slug: string): boolean {
 function translatedPath(slug: string, lang: Lang): string | null {
   if (lang === DEFAULT_LANG) return null;
   const p = path.join(postsRoot, lang, `${slug}.md`);
-  return fs.existsSync(p) ? p : null;
+  if (!fs.existsSync(p)) return null;
+  const ko = path.join(postsRoot, `${slug}.md`);
+  if (fs.existsSync(ko)) {
+    const original = matter(fs.readFileSync(ko, "utf8")).data;
+    const translated = matter(fs.readFileSync(p, "utf8")).data;
+    const originalDate = new Date(original.updated || original.date || 0).getTime();
+    const translatedDate = new Date(translated.updated || translated.date || 0).getTime();
+    // 원문 정정 뒤 갱신되지 않은 번역은 정정 전 정보를 노출하지 않는다.
+    if (originalDate > translatedDate) return null;
+  }
+  return p;
 }
 
-/** 읽을 파일 경로: 번역본 우선, 없으면 한국어 */
+export function hasCurrentTranslation(slug: string, lang: Lang): boolean {
+  return lang === DEFAULT_LANG || translatedPath(slug, lang) !== null;
+}
+
+/** 읽을 파일 경로: 최신 번역본 우선, 없거나 오래되면 한국어 */
 function resolvePath(slug: string, lang: Lang): { file: string; translated: boolean } | null {
   const tr = translatedPath(slug, lang);
   if (tr) return { file: tr, translated: true };
@@ -262,4 +276,4 @@ export function formatDate(dateStr: string, lang: Lang = DEFAULT_LANG): string {
 /** 기존 호출부 호환용 (한국어) */
 export function formatDateKo(dateStr: string): string {
   return formatDate(dateStr, DEFAULT_LANG);
-}
+}

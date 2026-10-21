@@ -39,3 +39,12 @@
     @apply rounded bg-accent-soft px-1 font-semibold;
   }
 }
+
+/* 견적 문의: 서버 수집 없이 메일 초안만 준비합니다. */
+.quote-form { display:grid; gap:12px; max-width:680px; margin-top:24px; }
+.quote-form label { font-weight:600; }
+.quote-form input:not([type=checkbox]), .quote-form select, .quote-form textarea { width:100%; color:#202020; background:#fff; border:1px solid #888; border-radius:6px; padding:12px; font:inherit; }
+.quote-form button, .quote-form [role=status] a { display:inline-block; width:fit-content; background:#253d32; color:#fff; border:0; border-radius:6px; padding:12px 18px; font:inherit; text-decoration:underline; cursor:pointer; }
+.quote-form .quote-consent { display:flex; align-items:flex-start; gap:10px; font-size:14px; font-weight:400; }
+.quote-form [role=status] { border:1px solid #55735e; padding:18px; border-radius:6px; }
+.quote-form p { font-size:14px; line-height:1.7; }
