@@ -45,6 +45,9 @@ export default function Footer({ lang = DEFAULT_LANG }: { lang?: Lang }) {
           <Link href={termsPath(DEFAULT_LANG)} className="hover:text-accent">
             {t(lang, "footerTerms")}
           </Link>
+          <Link href="/adpolicy" className="hover:text-accent">
+            광고정책
+          </Link>
         </nav>
       </div>
 
@@ -59,6 +62,10 @@ export default function Footer({ lang = DEFAULT_LANG }: { lang?: Lang }) {
           회사나 제품을 쓰거나 추천하는 대가로 돈을 받지 않습니다. 자세한 기준은{" "}
           <Link href="/editorial-policy" className="underline underline-offset-2">
             편집정책
+          </Link>
+          과{" "}
+          <Link href="/adpolicy" className="underline underline-offset-2">
+            광고정책
           </Link>
           을 확인해 주세요.
         </p>
