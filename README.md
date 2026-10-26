@@ -13,7 +13,7 @@
 - 로그인: `/login`
 - 관리: `/admin` (관리자만 추천 코드 생성·목록·비활성)
 - 광고 자리 5곳 (배너·사이드바·본문 중간·본문 하단·푸터) + 클라이언트·단위 ID 환경변수
-- 뉴스레터 구독: 홈·카테고리·글 하단 폼 → `POST /api/subscribe` → Supabase `hj_subscribers`
+- 뉴스레터: "준비 중" 안내만 표시 (수집·저장 없음)
 - 제휴 링크: 글 frontmatter `affiliate:` 로 지정하면 수익 발생 사실을 고지한 블록이 자동 표시
 - SEO: 메타데이터, Open Graph, hreflang(5개 언어), JSON-LD(글·사이트·분류), `sitemap.ts`, `robots.ts`
 - 본문 글 77편 (영문 kebab-case 슬러그)
@@ -79,7 +79,7 @@ affiliate:                    # 생략 가능. 넣으면 수익 고지 블록이
 
 - 사이트 제목 메타: **하루기록**
 - 글 URL은 `/p/why-write`처럼 짧은 영문 슬러그를 사용합니다. (한글 경로의 긴 인코딩을 피함)
-- 나중에 커스텀 도메인(예: `hyeonjang.kr`)을 연결하면 GitHub/Vercel 기본 URL 대신 쓸 수 있습니다. `NEXT_PUBLIC_SITE_URL`만 바꾸면 사이트맵·OG에 반영됩니다.
+- 도메인은 `seoulblue.com` 으로 연결되어 있습니다(Cloudflare Pages). `NEXT_PUBLIC_SITE_URL`만 바꾸면 사이트맵·OG에 반영됩니다.
 
 ## 기술 스택
 
@@ -146,7 +146,7 @@ tags: ["태그1", "태그2"]
 ## AdSense 설정
 
 1. [Google AdSense](https://www.google.com/adsense/)에서 사이트를 등록·심사 요청합니다.
-2. 승인되면 `.env.local`(또는 Vercel 환경변수)에 아래를 채웁니다.
+2. 승인되면 `.env.local`에 아래를 채우고 **다시 빌드**합니다(정적 export라 값이 빌드에 고정됨).
 
 ```
 NEXT_PUBLIC_ADSENSE_CLIENT=ca-pub-xxxxxxxxxxxxxxxx
@@ -167,45 +167,33 @@ NEXT_PUBLIC_ADSENSE_SLOT_FOOTER=...
   빈 상자가 남아 있으면 CLS가 생기고 심사에 불리하므로, 채우기 전에는 그 자리를
   비워 두는 편이 낫습니다.
 
-## 뉴스레터 구독자 저장
+## 뉴스레터 안내
 
-`supabase/schema.sql` 을 SQL Editor 에 실행하면 `hj_subscribers` 테이블이
-생깁니다. 환경변수가 없으면 `data/subscribers.json` 에 저장되며, 이 파일 저장은
-로컬 개발용입니다(Vercel 서버리스에서는 유지되지 않습니다).
+뉴스레터 폼은 "준비 중" 안내만 표시하며 이메일을 수집하지 않습니다. 서버·DB 저장 기능은 정적 전환(2026-10-26)과 함께 제거했습니다.
 
-수집 위치는 홈 사이드바·카테고리 하단·글 하단 세 곳입니다.
-`GET /api/subscribe` 로 목록을 셀 수는 없고, 집계가 필요하면 Supabase에서 직접
-보세요.
+## 배포 (Cloudflare Pages)
 
-## Vercel 배포
+정적 export 결과(`out/`)를 Cloudflare Pages에 업로드합니다. 서버 런타임은 쓰지 않습니다.
 
-1. 저장소를 Vercel에 Import
-2. Environment Variables: `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_ADSENSE_CLIENT`, 세 광고 단위 ID, `SESSION_SECRET`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`
-3. 배포 후 커스텀 도메인 연결 (예: hyeonjang.kr)
-4. 회원·추천인 저장소는 아래 **Supabase 연결** 섹션을 참고하세요. 환경변수가 없으면 로컬 파일 스토어(`data/store.json`)로 폴백하며, Vercel 서버리스의 읽기 전용 파일 시스템에서는 저장이 보장되지 않습니다.
+```powershell
+npm run build
+npx wrangler pages deploy out --project-name harugirok --branch main
+```
 
-## Supabase 연결 (회원·추천 코드 영속 저장)
-
-회원·추천 코드 데이터를 Vercel 등 서버리스 환경에서도 영속 저장하려면 Supabase를 연결합니다. SDK 없이 REST fetch만 사용하므로 의존성 추가가 없습니다.
-
-1. [Supabase](https://supabase.com/)에서 프로젝트를 생성합니다.
-2. SQL Editor에서 `supabase/schema.sql` 전체를 실행합니다. (`hj_store` 테이블 생성 + RLS 활성화)
-3. 프로젝트 설정 > API에서 **Project URL**과 **service_role** 키를 복사합니다.
-4. Vercel(또는 `.env.local`)에 환경변수를 설정합니다:
-   - `SUPABASE_URL` = Project URL (예: `https://xxxx.supabase.co`)
-   - `SUPABASE_SERVICE_ROLE_KEY` = service_role 키 (**서버 전용** — `NEXT_PUBLIC_` 접두사 금지, 브라우저에 노출되면 안 됩니다)
-5. 환경변수를 설정한 후 **재배포**합니다.
-
-두 환경변수가 모두 설정되면 회원·추천 코드가 `hj_store` 테이블(id=1 단일 행 JSON, upsert)에 저장됩니다. 설정되어 있지 않으면 기존대로 로컬 파일 스토어(`data/store.json`)로 동작하므로 로컬 개발에는 영향이 없습니다.
+- 프로젝트: `harugirok` (Cloudflare Pages, 계정 Nodongstyle01@gmail.com)
+- 도메인: `seoulblue.com`, `www.seoulblue.com` (DNS CNAME → `harugirok.pages.dev`, 프록시 켬)
+- 환경변수는 빌드 시점에 읽히므로, 값 변경 시 `npm run build` 후 재배포해야 반영됩니다.
+- `/posts/*` → `/p/*` 리다이렉트는 `public/_redirects`가 담당합니다.
+- 회원·추천·관리자 기능은 2026-10-26에 제거했습니다(정적 사이트).
 
 ## 폴더 구조 (요약)
 
 ```
-app/                 # 페이지·API·sitemap·robots
+app/                 # 페이지·sitemap·robots·rss
 components/          # Header, 폼, AdSlot 등
 content/posts/       # 마크다운 글
 data/                # store.json (런타임 시드, gitignore)
-lib/                 # posts, site, auth, store
+lib/                 # posts, site, i18n
 public/ads.txt       # AdSense 템플릿
 ```
 
