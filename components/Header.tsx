@@ -1,15 +1,9 @@
 import Link from "next/link";
-import { getSession } from "@/lib/auth";
 import { siteConfig } from "@/lib/site";
-import LogoutButton from "@/components/LogoutButton";
 import LanguageSwitcher from "@/components/LanguageSwitcher";
 import { DEFAULT_LANG, aboutPath, homePath, t, type Lang } from "@/lib/i18n";
 
-export default async function Header({ lang = DEFAULT_LANG }: { lang?: Lang }) {
-  const session = await getSession();
-  const isAdmin = session?.role === "admin";
-  const isMember = !!session && session.role === "member";
-
+export default function Header({ lang = DEFAULT_LANG }: { lang?: Lang }) {
   return (
     <header className="border-b border-ink-200 bg-white/90 backdrop-blur sticky top-0 z-40">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-4 sm:px-6">
@@ -37,36 +31,6 @@ export default async function Header({ lang = DEFAULT_LANG }: { lang?: Lang }) {
           >
             {t(lang, "navAbout")}
           </Link>
-          {!session ? (
-            <>
-              <Link
-                href="/join"
-                className="rounded-md px-2.5 py-1.5 hover:bg-ink-100 hover:text-accent"
-              >
-                {t(lang, "navJoin")}
-              </Link>
-              <Link
-                href="/login"
-                className="rounded-md px-2.5 py-1.5 hover:bg-ink-100 hover:text-accent"
-              >
-                {t(lang, "navLogin")}
-              </Link>
-            </>
-          ) : null}
-          {isMember ? (
-            <span className="hidden text-xs text-ink-700/70 sm:inline">
-              {session.username}
-            </span>
-          ) : null}
-          {isAdmin ? (
-            <Link
-              href="/admin"
-              className="rounded-md bg-accent/10 px-2.5 py-1.5 text-accent hover:bg-accent/20"
-            >
-              {t(lang, "navAdmin")}
-            </Link>
-          ) : null}
-          {session ? <LogoutButton /> : null}
         </nav>
       </div>
     </header>

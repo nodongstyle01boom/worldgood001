@@ -3,6 +3,7 @@ import { getAllCategories, getAllPosts, hasCurrentTranslation } from "@/lib/post
 import { siteConfig } from "@/lib/site";
 import { LANGS, langPrefix } from "@/lib/i18n";
 
+export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
