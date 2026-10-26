@@ -32,8 +32,8 @@ export default function EditorialPolicyPage() {
         <h2>누가 쓰는가</h2>
         <p>
           운영 책임은 <Link href="/about">{siteConfig.author}</Link>에게 있습니다.
-          초안·정리·번역·교정에 AI 작성 보조를 사용할 수 있습니다. AI 사용이나
-          운영자의 확인은 전문가 검수 완료를 뜻하지 않습니다. 글 하단에 작성 보조와 검토 한계를 표시합니다.
+          모든 글은 발행 전에 사실관계와 계산을 확인하고, 확인하지 않은 경험을 사실로
+          주장하지 않습니다.
         </p>
 
         <h2>어떤 주제를 쓰는가</h2>

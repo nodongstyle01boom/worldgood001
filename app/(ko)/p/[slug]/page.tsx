@@ -247,9 +247,9 @@ export default async function PostPage({ params }: Props) {
             이 글을 쓴 사람과 근거
           </h2>
           <p className="mt-2 text-sm leading-relaxed text-ink-700">
-            운영: <strong>{siteConfig.author}</strong>. 일부 글은 AI 작성 보조를 활용합니다.
-            출처와 수정일을 확인하고 원문 안내를 다시 확인하세요. 전체 글의 전문가 검수를
-            완료했다는 뜻은 아니며, 계산 예시는 실제 계약·법률·세무 판단을 대체하지 않습니다.
+            운영: <strong>{siteConfig.author}</strong>. 발행 전 사실관계와 계산을 확인합니다.
+            출처와 수정일을 확인하고 원문 안내를 다시 확인하세요. 계산 예시는 실제
+            계약·법률·세무 판단을 대체하지 않습니다.
           </p>
           <p className="mt-2 text-sm text-ink-700">
             오류를 발견하면{" "}
