@@ -1,0 +1,79 @@
+
+> worldgood001@0.1.0 build
+> next build
+
+   ▲ Next.js 15.5.25
+   - Environments: .env.local
+
+   Creating an optimized production build ...
+ ✓ Compiled successfully in 10.8s
+   Linting and checking validity of types ...
+   Collecting page data ...
+   Generating static pages (0/502) ...
+   Generating static pages (125/502) 
+   Generating static pages (250/502) 
+   Generating static pages (376/502) 
+ ✓ Generating static pages (502/502)
+   Finalizing page optimization ...
+   Collecting build traces ...
+
+Route (app)                                 Size  First Load JS
+┌ ƒ /                                      173 B         106 kB
+├ ○ /_not-found                            995 B         104 kB
+├ ● /[lang]                                173 B         106 kB
+├   ├ /en
+├   ├ /ja
+├   ├ /zh
+├   └ /es
+├ ● /[lang]/c/[category]                   173 B         106 kB
+├   ├ /en/c/tax
+├   ├ /en/c/money-invest
+├   ├ /en/c/jeonse
+├   └ [+53 more paths]
+├ ● /[lang]/p/[slug]                       167 B         106 kB
+├   ├ /en/p/adsense-ready-writing
+├   ├ /en/p/ai-assistant-comparison-ko
+├   ├ /en/p/ai-in-practice
+├   └ [+321 more paths]
+├ ƒ /about                                 161 B         103 kB
+├ ƒ /admin                               2.01 kB         105 kB
+├ ƒ /api/admin/login                       161 B         103 kB
+├ ƒ /api/admin/referrals                   161 B         103 kB
+├ ƒ /api/admin/referrals/[code]            161 B         103 kB
+├ ƒ /api/auth/join                         161 B         103 kB
+├ ƒ /api/auth/login                        161 B         103 kB
+├ ƒ /api/auth/logout                       161 B         103 kB
+├ ƒ /api/auth/me                           161 B         103 kB
+├ ƒ /api/subscribe                         161 B         103 kB
+├ ● /c/[category]                          173 B         106 kB
+├   ├ /c/tax
+├   ├ /c/money-invest
+├   ├ /c/jeonse
+├   └ [+11 more paths]
+├ ƒ /contact                               161 B         103 kB
+├ ƒ /editorial-policy                      167 B         106 kB
+├ ƒ /join                                1.32 kB         107 kB
+├ ƒ /login                               1.17 kB         107 kB
+├ ● /p/[slug]                              173 B         106 kB
+├   ├ /p/adsense-ready-writing
+├   ├ /p/ai-assistant-comparison-ko
+├   ├ /p/ai-in-practice
+├   └ [+78 more paths]
+├ ƒ /posts/[slug]                          161 B         103 kB
+├ ƒ /privacy                               161 B         103 kB
+├ ƒ /resources                             167 B         106 kB
+├ ○ /robots.txt                            161 B         103 kB
+├ ○ /rss.xml                               161 B         103 kB
+├ ƒ /services                            1.77 kB         108 kB
+├ ○ /sitemap.xml                           161 B         103 kB
+└ ƒ /terms                                 161 B         103 kB
++ First Load JS shared by all             103 kB
+  ├ chunks/255-37e0f0325134c4d7.js       46.4 kB
+  ├ chunks/4bd1b696-c023c6e3521b1417.js  54.2 kB
+  └ other shared chunks (total)          1.99 kB
+
+
+○  (Static)   prerendered as static content
+●  (SSG)      prerendered as static HTML (uses generateStaticParams)
+ƒ  (Dynamic)  server-rendered on demand
+

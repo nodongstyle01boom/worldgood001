@@ -32,8 +32,43 @@ export default function PrivacyPage() {
         <p>
           로그인 상태를 유지하기 위해 httpOnly 세션 쿠키를 사용합니다. 로그인
           쿠키는 최대 7일 동안 유지되며 로그아웃하거나 만료되면 삭제됩니다.
-          광고를 설정한 경우 Google AdSense가 자체 쿠키 또는 유사 기술을 사용할
-          수 있으며, 그 처리에는 Google의 정책이 적용됩니다.
+        </p>
+        <p>
+          광고를 표시하는 경우 Google AdSense가 자체 쿠키 또는 유사 기술을 사용할
+          수 있습니다. Google과 제3자 광고 공급업체는 이용자의 이전 방문 기록을
+          바탕으로 관련 광고를 게재하기 위해 쿠키를 사용할 수 있으며, 그 처리에는
+          Google의 정책이 적용됩니다.
+        </p>
+        <ul>
+          <li>
+            <a
+              href="https://www.google.com/settings/ads"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Google 광고 설정
+            </a>
+            에서 맞춤형 광고를 끌 수 있습니다.
+          </li>
+          <li>
+            <a
+              href="https://www.aboutads.info/choices/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              aboutads.info
+            </a>
+            에서 제3자 맞춤형 광고를 거부할 수 있습니다.
+          </li>
+          <li>
+            광고 게재 기준은 <a href="/adpolicy">광고 정책</a>에서 확인할 수
+            있습니다.
+          </li>
+        </ul>
+        <p>
+          EEA, 영국, 스위스 지역의 방문자에게는 Google의 EU 사용자 동의 정책에
+          따라 동의 요청 메시지가 표시될 수 있습니다. 동의하지 않아도 사이트는
+          계속 이용할 수 있으며, 동의 여부는 나중에 변경할 수 있습니다.
         </p>
 
         <h2>4. 보관과 삭제</h2>

@@ -55,6 +55,7 @@ export default function HomePage() {
         </div>
       </section>
 
+      <section className="mb-10 rounded-xl border border-accent/30 bg-accent-soft p-6"><h2 className="font-serif text-xl font-semibold">무료 자료로 시작하고, 필요한 제작만 상담하세요</h2><p className="mt-2 text-ink-700">퇴직 전 자료 점검표·가족 인터뷰 질문·기록집 예산표를 가입 없이 제공합니다. 문서 편집·AI 실습·책 제작은 별도 견적으로 진행합니다.</p><div className="mt-4 flex gap-5"><Link href="/resources" className="font-semibold text-accent underline">무료 자료 받기</Link><Link href="/services" className="font-semibold text-accent underline">상품·제작 문의</Link></div></section>
       {/* 돈이 걸린 문제로 바로 가는 입구 — 검색 의도가 뚜렷해 유입과 전환율도 높다. */}
       {moneyCategories.length > 0 ? (
         <section className="mb-10" aria-labelledby="money-topics">

@@ -5,9 +5,9 @@ const vercelUrl = process.env.VERCEL_URL
 export const siteConfig = {
   name: "하루기록",
   nameEn: "harugirok",
-  tagline: "하루 기록 · 현장 인사이트 · AI 실무",
+  tagline: "돈·일·기록 · 검증하는 실무 자료",
   description:
-    "하루의 기록과 현장의 문제를 AI 실무·노동·사람의 시점에서 읽고, 다시 쓸 수 있게 정리하는 공간입니다.",
+    "생활비·노동·AI 실무 정보를 출처와 계산으로 확인하고, 무료 점검표와 문서·책 제작으로 연결하는 공간입니다.",
   author: "씩씩한 하루",
   url: (process.env.NEXT_PUBLIC_SITE_URL || vercelUrl).replace(/\/+$/, ""),
   repositoryUrl: "https://github.com/worldculture08-bit/worldgood001",

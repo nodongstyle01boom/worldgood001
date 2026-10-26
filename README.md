@@ -8,7 +8,7 @@
 
 - 홈: `content/posts/*.md` 글 목록 — 상단에 "돈이 걸린 문제부터" 수익 주제 진입로
 - 글 상세: `/p/[slug]` (구 `/posts/[slug]` 는 리다이렉트)
-- 소개: `/about`, **편집정책**: `/editorial-policy` (AdSense 승인 심사 핵심 페이지)
+- 소개: `/about`, **편집정책**: `/editorial-policy`, **광고정책**: `/adpolicy` (AdSense 승인 심사 핵심 페이지)
 - 가입: `/join` (추천 코드 필수)
 - 로그인: `/login`
 - 관리: `/admin` (관리자만 추천 코드 생성·목록·비활성)
