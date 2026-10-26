@@ -9,9 +9,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const posts = getAllPosts();
   const base = siteConfig.url;
 
-  // 같은 글의 5개 언어 URL (ko 는 접두사 없음)
-  const variants = (path: string): string[] =>
-    LANGS.map((lang) => `${base}${langPrefix(lang)}${path}`);
+  // 한국어 원문만 색인한다. 번역본이 없는 언어 페이지는 중복으로 읽히므로 제외.
+  const variants = (path: string): string[] => [`${base}${path}`];
 
   const postEntries: MetadataRoute.Sitemap = posts.flatMap((post) =>
     LANGS.filter((lang) => hasCurrentTranslation(post.slug, lang))
