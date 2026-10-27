@@ -16,7 +16,7 @@ export default function Header({ lang = DEFAULT_LANG }: { lang?: Lang }) {
           </span>
         </Link>
         <nav className="flex shrink-0 flex-wrap items-center justify-end gap-1 text-sm font-medium text-ink-800 sm:gap-2">
-          {lang === "ko" ? <><Link href="/resources" className="rounded-md px-2.5 py-1.5 hover:text-accent">무료 자료</Link><Link href="/services" className="rounded-md px-2.5 py-1.5 hover:text-accent">제작 문의</Link></> : null}
+          {lang === "ko" ? <><Link href="/resources" className="rounded-md px-2.5 py-1.5 hover:text-accent">무료 자료</Link><Link href="/tools/severance" className="rounded-md px-2.5 py-1.5 hover:text-accent">퇴직금 계산기</Link><Link href="/services" className="rounded-md px-2.5 py-1.5 hover:text-accent">제작 문의</Link></> : null}
           {/* 언어 전환 — 오른쪽 상단 첫 버튼 */}
           <LanguageSwitcher current={lang} />
           <Link
